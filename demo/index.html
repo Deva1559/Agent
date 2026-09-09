@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiver AI Customer Support Agent - SpotifyCares Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-card: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --badge-auto-bg: rgba(16, 185, 129, 0.15);
+            --badge-auto-text: #047857;
+            --badge-esc-bg: rgba(239, 68, 68, 0.15);
+            --badge-esc-text: #b91c1c;
+        }
+
+        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; }
+        
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glass Background Orbs */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .orb-1 { width: 350px; height: 350px; background: #a7f3d0; top: -50px; left: -50px; }
+        .orb-2 { width: 400px; height: 400px; background: #bae6fd; bottom: -80px; right: -50px; }
+        .orb-3 { width: 300px; height: 300px; background: #e0e7ff; top: 40%; left: 60%; }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 920px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: #047857;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .input-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 0.6rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 110px;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            color: var(--text-main);
+            padding: 1rem;
+            font-size: 0.98rem;
+            font-weight: 500;
+            resize: vertical;
+            transition: all 0.2s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result-panel {
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .panel-header h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .badge-auto { background: var(--badge-auto-bg); color: var(--badge-auto-text); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-escalate { background: var(--badge-esc-bg); color: var(--badge-esc-text); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h4 {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .card p.metric-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .card-reply {
+            background: #ffffff;
+            border: 1.5px solid rgba(16, 185, 129, 0.4);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.08);
+        }
+
+        .card-reply h4 {
+            color: #047857;
+        }
+
+        .card-reply p {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .evidence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .evidence-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .evidence-item header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.4rem;
+            font-size: 0.82rem;
+        }
+
+        .evidence-item .sim-score {
+            color: #047857;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .evidence-item p {
+            color: #1e293b;
+            margin-bottom: 0.3rem;
+        }
+
+        .evidence-item p.brand-res {
+            color: #047857;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">Hiver AI Engineering Take-Home</div>
+            <h1>AI Customer Support Agent</h1>
+            <p class="subtitle">Real-time Intent Classification, RAG Retrieval & Multi-Signal Escalation for @SpotifyCares</p>
+        </div>
+        
+        <div class="input-card">
+            <label for="messageInput">Incoming Customer Query (Support Ticket / Tweet):</label>
+            <textarea id="messageInput" placeholder="e.g. Spotify Premium is skipping through songs constantly on android tablet & bluetooth speaker. Tried everything!"></textarea>
+            <div class="btn-wrapper" style="margin-top: 1rem;">
+                <button onclick="submitQuery()">Analyze & Draft Response</button>
+            </div>
+        </div>
+        
+        <div id="resultPanel" class="result-panel">
+            <div class="panel-header">
+                <h3>Agent Analysis & Evaluation Output</h3>
+                <span id="decisionBadge" class="badge"></span>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Predicted Intent Category</h4>
+                    <p id="predictedIntent" class="metric-value">-</p>
+                </div>
+                <div class="card">
+                    <h4>Model Confidence Score</h4>
+                    <p id="confidenceScore" class="metric-value">-</p>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 1.25rem;">
+                <h4>Decision Rationale / Policy Reason</h4>
+                <p id="escalationReason" style="font-weight: 600; color: #334155; font-size: 0.95rem;">-</p>
+            </div>
+            
+            <div class="card-reply">
+                <h4>Grounded Draft Response (Historical Resolution Conditioned)</h4>
+                <p id="draftReply">-</p>
+            </div>
+            
+            <div class="section-title">Top Retrieved Historical Resolution Evidence (RAG Corpus)</div>
+            <div id="evidenceContainer" class="evidence-list"></div>
+        </div>
+    </div>
+
+    <script>
+        async function submitQuery() {
+            const msg = document.getElementById('messageInput').value.trim();
+            if (!msg) return alert('Please enter a support query.');
+            
+            const btn = document.querySelector('button');
+            btn.innerText = 'Processing...';
+            btn.disabled = true;
+            
+            try {
+                const res = await fetch('http://127.0.0.1:8000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const data = await res.json();
+                
+                const panel = document.getElementById('resultPanel');
+                panel.style.display = 'block';
+                
+                document.getElementById('predictedIntent').innerText = data.intent;
+                document.getElementById('confidenceScore').innerText = (data.confidence * 100).toFixed(1) + '%';
+                document.getElementById('escalationReason').innerText = data.escalation_reason;
+                document.getElementById('draftReply').innerText = data.reply;
+                
+                const badge = document.getElementById('decisionBadge');
+                badge.innerText = data.decision.replace('_', ' ');
+                badge.className = 'badge ' + (data.decision === 'auto_handle' ? 'badge-auto' : 'badge-escalate');
+                
+                const container = document.getElementById('evidenceContainer');
+                container.innerHTML = '';
+                data.retrieved_cases.forEach((item, i) => {
+                    container.innerHTML += `
+                        <div class="evidence-item">
+                            <header>
+                                <span>Case ${i+1} (${item.intent})</span>
+                                <span class="sim-score">Similarity: ${(item.similarity_score*100).toFixed(1)}%</span>
+                            </header>
+                            <p><strong>Customer:</strong> "${item.historical_customer_text}"</p>
+                            <p class="brand-res"><strong>Historical Brand Resolution:</strong> "${item.historical_brand_reply}"</p>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                alert('API Request Failed. Ensure FastAPI server is running at http://127.0.0.1:8000.');
+            } finally {
+                btn.innerText = 'Analyze & Draft Response';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+  {
+    "System": "Baseline A (Majority + Generic)",
+    "Intent Accuracy": "39.5%",
+    "Groundedness": "5.00 / 5",
+    "Helpfulness": "2.00 / 5",
+    "Escalation Quality": "2.00 / 5",
+    "Overall Score": "2.50 / 5"
+  },
+  {
+    "System": "Baseline B (TF-IDF + Simple Retrieval)",
+    "Intent Accuracy": "84.5%",
+    "Groundedness": "5.00 / 5",
+    "Helpfulness": "4.00 / 5",
+    "Escalation Quality": "5.00 / 5",
+    "Overall Score": "4.61 / 5"
+  },
+  {
+    "System": "Proposed (Semantic RAG + Risk Escalation)",
+    "Intent Accuracy": "81.5%",
+    "Groundedness": "5.00 / 5",
+    "Helpfulness": "4.00 / 5",
+    "Escalation Quality": "4.62 / 5",
+    "Overall Score": "4.51 / 5"
+  }
+]

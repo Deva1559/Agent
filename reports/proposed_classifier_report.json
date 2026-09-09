@@ -1,0 +1,69 @@
+{
+  "account_access_security": {
+    "precision": 0.8730964467005076,
+    "recall": 0.8269230769230769,
+    "f1-score": 0.8493827160493828,
+    "support": 208.0
+  },
+  "app_crash_technical": {
+    "precision": 0.8888888888888888,
+    "recall": 0.5,
+    "f1-score": 0.64,
+    "support": 16.0
+  },
+  "billing_subscription_payment": {
+    "precision": 0.8010204081632653,
+    "recall": 0.8092783505154639,
+    "f1-score": 0.8051282051282052,
+    "support": 194.0
+  },
+  "content_metadata_playlists": {
+    "precision": 0.7894736842105263,
+    "recall": 0.718562874251497,
+    "f1-score": 0.7523510971786834,
+    "support": 167.0
+  },
+  "feedback_feature_request": {
+    "precision": 0.8070175438596491,
+    "recall": 0.37398373983739835,
+    "f1-score": 0.5111111111111111,
+    "support": 123.0
+  },
+  "general_inquiry_other": {
+    "precision": 0.7853448275862069,
+    "recall": 0.9343589743589743,
+    "f1-score": 0.8533957845433255,
+    "support": 975.0
+  },
+  "offline_local_files": {
+    "precision": 0.8823529411764706,
+    "recall": 0.7142857142857143,
+    "f1-score": 0.7894736842105263,
+    "support": 84.0
+  },
+  "playback_audio_issues": {
+    "precision": 0.8492063492063492,
+    "recall": 0.6925566343042071,
+    "f1-score": 0.7629233511586453,
+    "support": 309.0
+  },
+  "student_family_discount": {
+    "precision": 0.8761904761904762,
+    "recall": 0.7666666666666667,
+    "f1-score": 0.8177777777777778,
+    "support": 120.0
+  },
+  "accuracy": 0.8105646630236795,
+  "macro avg": {
+    "precision": 0.8391768406647044,
+    "recall": 0.7040684479047776,
+    "f1-score": 0.753504858573073,
+    "support": 2196.0
+  },
+  "weighted avg": {
+    "precision": 0.814984507504777,
+    "recall": 0.8105646630236795,
+    "f1-score": 0.8032190823649507,
+    "support": 2196.0
+  }
+}

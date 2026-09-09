@@ -1,0 +1,42 @@
+{
+  "SpotifyCares": {
+    "total_thread_rows": 88445,
+    "brand_replies": 43265,
+    "customer_tweets": 56907,
+    "reconstructed_threads": 26068,
+    "avg_thread_length": 3.39,
+    "avg_customer_msg_length": 103.8
+  },
+  "AppleSupport": {
+    "total_thread_rows": 226755,
+    "brand_replies": 106860,
+    "customer_tweets": 143285,
+    "reconstructed_threads": 74615,
+    "avg_thread_length": 3.04,
+    "avg_customer_msg_length": 109.3
+  },
+  "AmazonHelp": {
+    "total_thread_rows": 358973,
+    "brand_replies": 169840,
+    "customer_tweets": 255498,
+    "reconstructed_threads": 76799,
+    "avg_thread_length": 4.67,
+    "avg_customer_msg_length": 116.2
+  },
+  "Uber_Support": {
+    "total_thread_rows": 122194,
+    "brand_replies": 56270,
+    "customer_tweets": 77408,
+    "reconstructed_threads": 39355,
+    "avg_thread_length": 3.1,
+    "avg_customer_msg_length": 120.1
+  },
+  "hulu_support": {
+    "total_thread_rows": 46428,
+    "brand_replies": 21872,
+    "customer_tweets": 30792,
+    "reconstructed_threads": 14092,
+    "avg_thread_length": 3.29,
+    "avg_customer_msg_length": 110.6
+  }
+}

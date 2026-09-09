@@ -1,0 +1,17 @@
+{
+  "Baseline_1_Majority": {
+    "accuracy": 0.444,
+    "macro_f1": 0.0683,
+    "weighted_f1": 0.273
+  },
+  "Baseline_2_TFIDF_LogReg": {
+    "accuracy": 0.8689,
+    "macro_f1": 0.7939,
+    "weighted_f1": 0.8639
+  },
+  "Proposed_Semantic_Classifier": {
+    "accuracy": 0.8106,
+    "macro_f1": 0.7535,
+    "weighted_f1": 0.8032
+  }
+}

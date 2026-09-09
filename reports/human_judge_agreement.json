@@ -1,0 +1,7 @@
+{
+  "num_eval_samples": 30,
+  "spearman_correlation": 0.4644,
+  "p_value": 0.009721,
+  "mean_absolute_error": 0.1967,
+  "agreement_level": "MODERATE"
+}

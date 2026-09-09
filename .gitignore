@@ -1,0 +1,22 @@
+# Virtual environment & Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+env/
+venv/
+
+# Large Datasets & Scratch Files
+twcs/
+scratch_unwanted/
+*.csv
+
+# Model Artifacts (reproducible via python src/intent/train_classifiers.py)
+models/
+
+# Environment Variables & Credentials
+.env
+.env.local
+*.pem
+*.key
