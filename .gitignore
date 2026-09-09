@@ -7,16 +7,14 @@ __pycache__/
 env/
 venv/
 
-# Large Datasets & Scratch Files
-twcs/
-scratch_unwanted/
-*.csv
-
-# Model Artifacts (reproducible via python src/intent/train_classifiers.py)
+# Large Raw Datasets & Model Artifacts
+data/raw/
 models/
 
-# Environment Variables & Credentials
+# Extra Workspace Files / Unwanted Folder
+extra_workspace_files/
+golden/
+
+# Environment Secrets
 .env
 .env.local
-*.pem
-*.key
