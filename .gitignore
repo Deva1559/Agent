@@ -13,7 +13,6 @@ models/
 
 # Extra Workspace Files / Unwanted Folder
 extra_workspace_files/
-golden/
 
 # Environment Secrets
 .env
